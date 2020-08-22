@@ -9,5 +9,9 @@ module.exports = (env) => ({
       },
     ],
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new MiniCssExtractPlugin({
+      // filename: "[name].[hash].css",
+    }),
+  ],
 });

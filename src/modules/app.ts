@@ -1,4 +1,8 @@
-class PWAConfApp {
+export class PWAConfApp {
+  private speakers: any;
+  private schedule: any;
+  private speakersDiv: HTMLDivElement;
+  private scheduleDiv: HTMLDivElement;
   constructor() {
     this.speakersDiv = document.querySelector(".speakers");
     this.scheduleDiv = document.querySelector(".schedule");
@@ -23,7 +27,7 @@ class PWAConfApp {
     this.scheduleDiv.innerHTML = this.schedule.map(this.toScheduleBlock).join("\n");
   }
 
-  toSpeakerBlock(speaker) {
+  toSpeakerBlock(speaker: any) {
     return `
           <div class="speaker">
             <img src="${speaker.picture}" alt="${speaker.name}">
@@ -31,7 +35,7 @@ class PWAConfApp {
           </div>`;
   }
 
-  toScheduleBlock(scheduleItem) {
+  toScheduleBlock(scheduleItem: any) {
     return `
         <div class="schedule-item ${scheduleItem.category}">
           <div class="title-and-time">
@@ -48,21 +52,17 @@ class PWAConfApp {
       `;
   }
 
-  addSpeakerDetails(item) {
+  addSpeakerDetails(item: any) {
     if (item.speakerId) {
       return Object.assign({}, item, {
-        speaker: this.speakers.find((s) => s.id === item.speakerId),
+        speaker: this.speakers.find((s: any) => s.id === item.speakerId),
       });
     }
     return Object.assign({}, item);
   }
 
-  async fetchJSON(url) {
+  async fetchJSON(url: any) {
     const res = await fetch(url);
     return res.json();
   }
 }
-
-module.exports = {
-  PWAConfApp,
-};

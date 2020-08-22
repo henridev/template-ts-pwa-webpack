@@ -1,9 +1,6 @@
 const path = require("path");
-require("@babel/register");
-require("dotenv").config();
 const { merge } = require("webpack-merge");
 const { pluginArray } = require("./webpack.plugins");
-
 const modeConfig = (env) =>
   require(path.resolve(__dirname, "webpack", `webpack.${env.mode}.js`))(env);
 
@@ -21,22 +18,21 @@ module.exports = (env) =>
     {
       mode: env.mode || "production",
       plugins: pluginArray,
-      entry: ["@babel/polyfill", "./src/index.js"],
-      output: {
-        path: path.resolve(__dirname, "build"),
-        filename: "bundle.js",
-      },
+      entry: ["./src/index.ts"],
+      // output: {
+      //   filename: "[name].js",
+      // },
       module: {
         rules: [
           {
-            test: /\.js$/,
+            test: /\.tsx?$/,
+            use: "ts-loader",
             exclude: /node_modules/,
-            use: ["babel-loader"],
           },
         ],
       },
       resolve: {
-        modules: [path.resolve("./src"), path.resolve("./node_modules")],
+        extensions: [".tsx", ".ts", ".js"],
       },
     },
     modeConfig(env),

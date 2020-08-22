@@ -27,9 +27,7 @@ const copyTobuild = new CopyWebpackPlugin({
 });
 
 const pluginArray = [
-  new CleanWebpackPlugin({
-    cleanStaleWebpackAssets: true,
-  }),
+  new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ["dist/*"] }),
   new ProgressPlugin(),
   indexHtml,
   copyTobuild,

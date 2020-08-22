@@ -1,3 +1,14 @@
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js");
+
+if ("workbox" in self) {
+  // workbox.core.skipWaiting();
+  // workbox.core.clientsClaim();
+
+  console.log("service working");
+
+  workbox.precaching.precacheAndRoute(self.__WB_MANIFEST || []);
+}
+
 // const cacheName = "pwa-conf-v1";
 // const staticAssets = ["./", "./index.html", "index.js", "styles.css"];
 // const EVENTS = {
@@ -68,7 +79,3 @@
 // }
 
 // console.log("here");
-
-if ("workbox" in self) {
-  workbox.precaching.precacheAndRoute(self.__WB_MANIFEST || []);
-}

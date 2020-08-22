@@ -5,6 +5,7 @@ module.exports = (env) => ({
     new InjectManifest({
       swSrc: "./src/sw.js",
       swDest: "sw.js",
+      maximumFileSizeToCacheInBytes: 5000000000,
     }),
   ],
 });
