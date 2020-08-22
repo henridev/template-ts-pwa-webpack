@@ -1,8 +1,22 @@
-import HelloWorld from 'components/HelloWorld';
-import 'main.css';
+import "./styles/styles.css";
+import { PWAConfApp } from "./js/app";
 
-const main = async () => {
-    HelloWorld();
+async function registerSW() {
+  if ("serviceWorker" in navigator) {
+    try {
+      await navigator.serviceWorker.register("./sw.js");
+    } catch (error) {
+      window.alert("error during sw registration -> ", error);
+    }
+  } else {
+    window.alert("sw registration is not supported");
+  }
 }
-
-main().then(() => console.log('Started'));
+(function main() {
+  window.addEventListener("load", (e) => {
+    console.log("window loaded");
+    new PWAConfApp();
+    console.log("app loaded");
+    registerSW();
+  });
+})();
